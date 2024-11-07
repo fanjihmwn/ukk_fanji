@@ -124,7 +124,7 @@
 <div class="container mt-3">
    
     <div class="text-center mb-5">
-        <h1>Selamat Datang di Galeri Foto Monsterverse</h1>
+        <h1>Selamat Datang di Galeri Foto</h1>
     </div>
 
     <div class="row">
