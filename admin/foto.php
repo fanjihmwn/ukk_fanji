@@ -23,33 +23,33 @@ if ($_SESSION['status'] != 'login') {
             color: #343a40; 
         }
         .navbar {
-            background-color: #007bff; 
+            background-color: #007bff; /* Biru */
         }
         .navbar-brand, .navbar-nav .nav-link {
             color: white !important; 
         }
         .card {
             margin-top: 20px; 
-            border: 2px solid #007bff; 
+            border: 2px solid #007bff; /* Border biru */
             border-radius: 10px; 
         }
         .card-header {
-            background-color: #007bff; 
+            background-color: #007bff; /* Biru */
             color: white; 
         }
         .btn-primary {
-            background-color: #28a745; 
+            background-color: #007bff; /* Biru */
             border: none;
         }
         .btn-primary:hover {
-            background-color: #218838; 
+            background-color: #0056b3; /* Biru gelap saat hover */
         }
         .btn-danger {
-            background-color: #dc3545; 
+            background-color: #dc3545; /* Merah untuk tombol hapus */
             border: none;
         }
         .btn-danger:hover {
-            background-color: #c82333;
+            background-color: #c82333; /* Merah gelap saat hover */
         }
         footer {
             background-color: #e9ecef; 
@@ -117,7 +117,6 @@ if ($_SESSION['status'] != 'login') {
                                 <th>Tanggal</th>
                                 <th>Akun</th>
                                 <th>Aksi</th>
-                                
                             </tr>
                         </thead>
                         <tbody>

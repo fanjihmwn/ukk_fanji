@@ -127,8 +127,7 @@
         <h1>Selamat Datang di Galeri Foto</h1>
     </div>
 
-    <div class="row">
-        <!-- Example photo cards -->       <div class="col-md-3 mb-4">
+    <div class="row">     <div class="col-md-3 mb-4">
             <div class="card">
                 <img src="assets/img/god.jpg" class="card-img-top" alt="Gunung">
                 
@@ -136,10 +135,10 @@
         </div>
       
         <div class="col-md-3 mb-4">
-            <div class="card">
+           
                 <img src="assets/img/kk.jpg" class="card-img-top" alt="Laut">
                
-            </div>
+           
         </div>
       
         <div class="col-md-3 mb-4">

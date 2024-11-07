@@ -1,11 +1,24 @@
 <?php 
 session_start();
-include '../config/koneksi.php';
+require_once ('../config/koneksi.php');
+
+// Cek apakah user sudah login
 if ($_SESSION['status'] != 'login') {
     echo "<script>
     alert('Anda Belum Login');
     location.href='../index.php';
     </script>";
+    exit();
+}
+
+// Cek apakah user memiliki peran admin
+$role = $_SESSION['role'];
+if ($role != 'admin') {
+    echo "<script>
+    alert('Anda tidak memiliki izin untuk mengakses halaman ini.');
+    location.href='../index.php';
+    </script>";
+    exit();
 }
 ?>
 
@@ -17,40 +30,29 @@ if ($_SESSION['status'] != 'login') {
     <title>Website Galeri Foto</title>
     <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.min.css">
     <style>
-    
-    .navbar, .card-header, .modal-header, footer {
-        background-color: #007bff; 
-        color: #ffffff; 
-    }
-    .navbar .navbar-brand, footer p, .nav-link {
-        color: #ffffff;
-    }
-    .btn-outline-danger {
-        border-color: #007bff; 
-        color: #007bff; 
-    }
-    .btn-outline-danger:hover {
-        background-color: #0056b3; /
-        color: #ffffff; 
-    }
-    .btn-primary {
-        background-color: #007bff; 
-        color: #ffffff; 
-        border-color: #007bff;
-    }
-    .btn-primary:hover {
-        background-color: #0056b3;
-        color: #ffffff; 
-    }
-    .btn-danger {
-        background-color: #ff4444; 
-        border-color: #ff4444; /
-        color: #ffffff;
-    }
-    footer {
-        background-color: #007bff;
-        color: #ffffff; 
-    }
+        .navbar, .card-header, .modal-header, footer {
+            background-color: #007bff; /* Biru */
+            color: white;
+        }
+        .navbar .navbar-brand, footer p, .nav-link {
+            color: white; /* Warna putih untuk teks link */
+        }
+        .btn-outline-danger {
+            border-color: #007bff; /* Border biru */
+            color: #007bff; /* Warna teks biru */
+        }
+        .btn-outline-danger:hover {
+            background-color: #0056b3; /* Biru gelap saat hover */
+            color: white;
+        }
+        .btn-primary {
+            background-color: #007bff; /* Biru */
+            border-color: #007bff; /* Border biru */
+        }
+        .btn-danger {
+            background-color: #d32f2f; /* Merah untuk tombol hapus */
+            border-color: #d32f2f; /* Border merah */
+        }
     </style>
 </head>
 <body>
@@ -66,7 +68,7 @@ if ($_SESSION['status'] != 'login') {
         <a href="album.php" class="nav-link">Album</a>
         <a href="foto.php" class="nav-link">Foto</a>
       </div>
-      <a href="../config/aksi_logout.php" class="btn btn-outline-light m-1">LOGOUT</a>
+      <a href="../config/aksi_logout.php" class="btn btn-outline-dark m-1">LOGOUT</a>
     </div>
   </div>
 </nav>
@@ -99,6 +101,7 @@ if ($_SESSION['status'] != 'login') {
                             <th>Nama Album</th>
                             <th>Deskripsi</th>
                             <th>Tanggal</th>
+                            <th>Akun</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -106,7 +109,7 @@ if ($_SESSION['status'] != 'login') {
                         <?php 
                         $no = 1;
                         $userid = $_SESSION['userid'];
-                        $sql = mysqli_query($koneksi,"SELECT * FROM album WHERE userid=$userid");
+                        $sql = mysqli_query($koneksi,"SELECT * FROM album INNER JOIN user ON album.userid=user.userid");
                         while($data = mysqli_fetch_array($sql)) {
                         ?>
                         <tr>
@@ -114,6 +117,7 @@ if ($_SESSION['status'] != 'login') {
                             <td> <?php echo $data['namaalbum'] ?></td>
                             <td> <?php echo $data['deskripsi'] ?></td>
                             <td> <?php echo $data['tanggalbuat'] ?></td>
+                            <td> <?php echo $data['namalengkap'] ?></td>
                             <td>
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit<?php echo$data['albumid'] ?>">
                                     Edit
@@ -176,10 +180,11 @@ if ($_SESSION['status'] != 'login') {
     </div>
 </div>
 
-<footer class="d-flex justify-content-center border-top mt-3 bg-light fixed-bottom">
+<footer class="d-flex justify-content-center border-top mt-3">
     <p>&copy; UKK RPL 2024 | FANJI</p>
 </footer>
 
+    
 <script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
 </body>
 </html>
