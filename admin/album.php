@@ -68,7 +68,7 @@ if ($role != 'admin') {
         <a href="album.php" class="nav-link">Album</a>
         <a href="foto.php" class="nav-link">Foto</a>
       </div>
-      <a href="../config/aksi_logout.php" class="btn btn-outline-dark m-1">LOGOUT</a>
+      <a href="../config/aksi_logout.php" class="btn btn-danger m-1">KELUAR</a>
     </div>
   </div>
 </nav>
